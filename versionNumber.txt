@@ -1,5 +1,5 @@
 This text file is merely an indecator of the code version.
 The current version is:
-masters
+version 0
 The current branch is:
 version 0
