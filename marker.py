@@ -54,36 +54,4 @@ def frame_all_images(wide, rgb):
         # Save the altered image, suing PNG to retain transparency
         new_image_filename = os.path.join(new_directory, filename + '.png')
         new_image.save(new_image_filename)
-
-def alter_one(picture, scale): #shrinks
-    resize = PIL.Image.open(picture)
-    width,height=resize.size
-    resize = resize.resize((width-scale,height-scale))
-    return resize
-
-def alter_all_images(scale):
-    directory = os.getcwd() # Use working directory if unspecified
-
-    # Create a new directory 'modified'
-    new_directory = os.path.join(directory, 'shrunk')
-    try:
-        os.mkdir(new_directory)
-    except OSError:
-        pass # if the directory already exists, proceed
-
-    # Load all the images
-    image_list, file_list = get_images(directory)
-
-    # Go through the images and save modified versions
-    for n in range(len(image_list)):
-        # Parse the filename
-        print n
-        filename, filetype = os.path.splitext(file_list[n])
-
-        # Round the corners with default percent of radius
-        curr_image = file_list[n]
-        new_image = alter_one(curr_image, scale)
-
-        # Save the altered image, suing PNG to retain transparency
-        new_image_filename = os.path.join(new_directory, filename + '.png')
-        new_image.save(new_image_filename)
+       
