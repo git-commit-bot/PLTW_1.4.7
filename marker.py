@@ -5,9 +5,11 @@ import os.path
 
 def frame_one(picture, wide, rgb):
 
+    # Opens image and assigns it as the back ground. Also graphs image size.
     background = PIL.Image.open(picture)
     background.convert(mode='RGBA')
     width, height = background.size
+    # Creates a new mask that will cover the borders of the image.
     frame0 = PIL.Image.new('RGBA',(width,height),color=None)
     frame1 = PIL.ImageDraw.Draw(frame0)
     frame1.rectangle([(0,0),(width,wide)],fill=rgb)#top box
