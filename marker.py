@@ -17,10 +17,6 @@ def frame_one(picture, wide, rgb):
     frame1.rectangle([(width,height),(0,height-wide)],fill=rgb)#bottom box
     frame1.rectangle([(width,height),(width-wide,0)],fill=rgb)#right box
     frame1.rectangle([(wide,wide),(width-wide,height-wide)],fill=rgb)#clear area
-    #framed = PIL.Image.alpha_composite(background, frame0)
-    #return framed
-    ##background.paste(frame0)
-    ##return background
     dwide = 2*wide
     newground = background.resize((width-dwide,height-dwide))
     frame0.paste(newground, box=(wide,wide))
