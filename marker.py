@@ -1,4 +1,3 @@
-'''Code basis. The end result will look very much different.'''
 import PIL
 import os.path
 
@@ -19,7 +18,6 @@ def frame_one(picture, wide, rgb):
     newground = background.resize((width-dwide,height-dwide))
     frame0.paste(newground, box=(wide,wide))
     return frame0
-
 
 def frame_all_images(wide, rgb):
     directory = os.getcwd() # Use working directory if unspecified
