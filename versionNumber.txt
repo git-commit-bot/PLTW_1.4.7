@@ -1,7 +1,5 @@
 This text file is merely an indecator of the code version.
-The current version is:
-Version 0
 The current branch is:
-Master
-This program:
-Currently Works
+Version1
+This program currently:
+Works, but is not fully doing what it should.
