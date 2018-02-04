@@ -29,30 +29,32 @@ def get_images(directory=None):
     return image_list, file_list
 
 def frame_one(picture, wide, rgb):
-    # Opens image and assigns it as the background.
-    background = PIL.Image.open(picture)
+    if 'support' in picture:
+        return None
+    else:
+        pass
+    background = PIL.Image.open(picture)# Opens image and assigns it as the background.
     background.convert(mode='RGBA')
     width, height = background.size
     # Building a square frame (out of 4 polygons) on the frame1 and by extension the frame0 canvises 
-    frame0 = PIL.Image.new('RGBA',(width,height),color=None)
-    frame1 = PIL.ImageDraw.Draw(frame0)
-    frame1.rectangle([(0,0),(width,wide)],fill=rgb)#top box
-    frame1.rectangle([(0,0),(wide,height)],fill=rgb)#left box
-    frame1.rectangle([(width,height),(0,height-wide)],fill=rgb)#bottom box
-    frame1.rectangle([(width,height),(width-wide,0)],fill=rgb)#right box
-    frame1.rectangle([(wide,wide),(width-wide,height-wide)],fill=rgb)#clear area
-    dwide = 2*wide
-    newground = background.resize((width-dwide,height-dwide))
+    frame0 = PIL.Image.new('RGBA',(width,height),color=None)# Creates the frame0 canvis with the same dimensions as the original picture
+    frame1 = PIL.ImageDraw.Draw(frame0)# 
+    frame1.rectangle([(0,0),(width,wide)],fill=rgb)# Draws top box
+    frame1.rectangle([(0,0),(wide,height)],fill=rgb)# Draws left box
+    frame1.rectangle([(width,height),(0,height-wide)],fill=rgb)# Draws bottom box
+    frame1.rectangle([(width,height),(width-wide,0)],fill=rgb)# Draws right box
+    frame1.rectangle([(wide,wide),(width-wide,height-wide)],fill=rgb)# Draws clear area
+    dwide = 2*wide # Creates the dwide variable set to 2* the width of the frame
+    newground = background.resize((width-dwide,height-dwide)) # Resizes the picture to fit within the frame
     frame0.paste(newground, box=(wide,wide))
-    return frame0
+    return frame0 # Returns the frame0 object
 
-def frame_all_images(wide, rgb):
-    directory = os.getcwd() # Use working directory if unspecified
-    # Create a new directory 'modified'
-    new_directory = os.path.join(directory, 'framed')
-    try:
-        os.mkdir(new_directory)
-    except OSError:
+def make_images_support(wide, rgb):
+    directory = os.getcwd() # Uses working directory
+    new_directory = os.path.join(directory, 'support_images')# Create a new directory 'support_images'
+    try: # Attempts
+        os.mkdir(new_directory)# to make a new directory
+    except OSError:# unless it throws an oserror
         pass # if the directory already exists, proceed
     # Load all the images
     image_list, file_list = get_images(directory)
@@ -61,10 +63,12 @@ def frame_all_images(wide, rgb):
         # Parse the filename
         print n
         filename, filetype = os.path.splitext(file_list[n])
-        # Round the corners with default percent of radius
+        # Frames the image with the requested frame size
         curr_image = file_list[n]
         new_image = frame_one(curr_image, wide, rgb)
-        # Save the altered image, suing PNG to retain transparency
+        # Saves the altered image as PNG
         new_image_filename = os.path.join(new_directory, filename + '.png')
-        new_image.save(new_image_filename)
-       
+        try:
+            new_image.save(new_image_filename)
+        except AttributeError:
+            pass
