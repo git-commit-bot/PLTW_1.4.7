@@ -10,7 +10,6 @@ def get_images(directory=None):
     a list with a  PIL.Image object for each image file in root_directory, and
     a list with a string filename for each image file in root_directory
     """
-    
     if directory == None:
         directory = os.getcwd() # Use working directory if unspecified
         
@@ -28,13 +27,14 @@ def get_images(directory=None):
             pass # do nothing with errors tying to open non-images
     return image_list, file_list
 
-def frame_one(picture, wide, rgb):
+def make_support(picture, wide, rgb):
     if 'support' in picture:
         return None
     else:
         pass
     background = PIL.Image.open(picture)# Opens image and assigns it as the background.
-    background.convert(mode='RGBA')
+    mask = PIL.Image.open('support.png')
+    mosk = PIL.ImageDraw.Draw(mask,mode='RGBA')
     width, height = background.size
     # Building a square frame (out of 4 polygons) on the frame1 and by extension the frame0 canvises 
     frame0 = PIL.Image.new('RGBA',(width,height),color=None)# Creates the frame0 canvis with the same dimensions as the original picture
@@ -46,7 +46,7 @@ def frame_one(picture, wide, rgb):
     frame1.rectangle([(wide,wide),(width-wide,height-wide)],fill=rgb)# Draws clear area
     dwide = 2*wide # Creates the dwide variable set to 2* the width of the frame
     newground = background.resize((width-dwide,height-dwide)) # Resizes the picture to fit within the frame
-    frame0.paste(newground, box=(wide,wide))
+    frame0.paste(newground,box=(wide,wide),mask=mosk)
     return frame0 # Returns the frame0 object
 
 def make_images_support(wide, rgb):
@@ -65,7 +65,7 @@ def make_images_support(wide, rgb):
         filename, filetype = os.path.splitext(file_list[n])
         # Frames the image with the requested frame size
         curr_image = file_list[n]
-        new_image = frame_one(curr_image, wide, rgb)
+        new_image = make_support(curr_image, wide, rgb)
         # Saves the altered image as PNG
         new_image_filename = os.path.join(new_directory, filename + '.png')
         try:
