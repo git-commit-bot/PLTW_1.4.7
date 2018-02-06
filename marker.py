@@ -28,6 +28,10 @@ def get_images(directory=None):
     return image_list, file_list
 
 def make_support(picture, wide, rgb):
+    '''
+    Imposes the support image on the input picture 'picture', with a frame made with width 'wide' and color (stored as a 4 element tuple)
+    'rgb'.
+    '''
     if 'support' in picture:
         return None
     else:
