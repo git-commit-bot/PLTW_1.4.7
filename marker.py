@@ -28,8 +28,7 @@ def get_images(directory=None):
     return image_list, file_list
 
 def make_support(picture, wide, rgb):
-    '''
-    Imposes the support image on the input picture 'picture', with a frame made with width 'wide' and color (stored as a 4 element tuple)
+    '''Imposes the support image on the input picture 'picture', with a frame made with width 'wide' and color (stored as a 4 element tuple)
     'rgb'.
     '''
     if 'support' in picture:
@@ -38,7 +37,6 @@ def make_support(picture, wide, rgb):
         pass
     background = PIL.Image.open(picture)# Opens image and assigns it as the background.
     mask = PIL.Image.open('support.png')
-    mosk = PIL.ImageDraw.Draw(mask,mode='RGBA')
     width, height = background.size
     # Building a square frame (out of 4 polygons) on the frame1 and by extension the frame0 canvises 
     frame0 = PIL.Image.new('RGBA',(width,height),color=None)# Creates the frame0 canvis with the same dimensions as the original picture
@@ -50,10 +48,12 @@ def make_support(picture, wide, rgb):
     frame1.rectangle([(wide,wide),(width-wide,height-wide)],fill=rgb)# Draws clear area
     dwide = 2*wide # Creates the dwide variable set to 2* the width of the frame
     newground = background.resize((width-dwide,height-dwide)) # Resizes the picture to fit within the frame
-    frame0.paste(newground,box=(wide,wide),mask=mosk)
+    frame0.paste(newground,box=(wide,wide))
     return frame0 # Returns the frame0 object
 
 def make_images_support(wide, rgb):
+    ''' Makes all images in the current directory support images (frames them and imposes the support image on the background)
+    '''
     directory = os.getcwd() # Uses working directory
     new_directory = os.path.join(directory, 'support_images')# Create a new directory 'support_images'
     try: # Attempts
