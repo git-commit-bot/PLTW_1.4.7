@@ -22,10 +22,10 @@ def get_images(directory=None):
         absolute_filename = os.path.join(directory, entry)
         try:
             image = PIL.Image.open(absolute_filename)
-            file_list += [entry]
+            file_list += [entry] 
             image_list += [image]
         except IOError:
-            pass # do nothing with errors tying to open non-images
+            pass # do nothing with errors trying to open non-images
     return image_list, file_list
 
 def frame_one(picture, wide, rgb):
@@ -71,4 +71,4 @@ def make_images_support(wide, rgb):
         try:
             new_image.save(new_image_filename)
         except AttributeError:
-            pass
+            pass # Does nothing with the image if unable to save the image
