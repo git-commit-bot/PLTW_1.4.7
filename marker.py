@@ -28,8 +28,12 @@ def get_images(directory=None):
     return image_list, file_list
 
 def make_support(picture, wide, rgb):
-    '''Imposes the support image on the input picture 'picture', with a frame made with width 'wide' and color (stored as a 4 element tuple)
-    'rgb'.
+    '''Imposes the support image on the input picture in the current directory, 
+    as well as a frame around the image
+    
+    Takes the argumets 'picture' (a string which is the filename of the picture which to apply the frame to)
+    'wide' (an unsigned integer which is used to determine frame thiccness)
+    and 'rgb' (a 4 element tuple which determines the rgb color value of the frame)
     '''
     if 'support' in picture:
         return None
@@ -58,7 +62,12 @@ def make_support(picture, wide, rgb):
     return frame0 # Returns the frame0 object
 
 def make_images_support(wide, rgb):
-    ''' Makes all images in the current directory support images (frames them and imposes the support image on the background)
+    ''' Makes all images in the current directory support 
+    images (frames them and imposes the support image on the background)
+    
+    Takes the arguments 'wide' (an unsigned integer which is used to determine frame thickness)
+    and 'rgb' (a 4 element tuple which is an rgb value used to determine frame color)
+    
     '''
     directory = os.getcwd() # Uses working directory
     new_directory = os.path.join(directory, 'support_images')# Create a new directory 'support_images'
