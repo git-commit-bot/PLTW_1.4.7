@@ -5,7 +5,7 @@ import os.path
 def get_images():
     """ Returns PIL.Image objects for all the images in directory.
     
-    If directory is not specified, uses current directory.
+    Uses current directory.
     Returns a 2-tuple containing 
     a list with a  PIL.Image object for each image file in root_directory, and
     a list with a string filename for each image file in root_directory
@@ -73,7 +73,7 @@ def make_images_support(wide, rgb):
     except OSError:# unless it throws an oserror
         pass # if the directory already exists, proceed
     # Load all the images
-    image_list, file_list = get_images(directory)
+    image_list, file_list = get_images()
     # Go through the images and save modified versions
     for n in range(len(image_list)):
         # Parse the filename
