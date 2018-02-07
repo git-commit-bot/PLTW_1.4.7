@@ -2,7 +2,7 @@ import PIL
 import PIL.ImageDraw
 import os.path
 
-def get_images(directory=None):
+def get_images():
     """ Returns PIL.Image objects for all the images in directory.
     
     If directory is not specified, uses current directory.
@@ -10,22 +10,19 @@ def get_images(directory=None):
     a list with a  PIL.Image object for each image file in root_directory, and
     a list with a string filename for each image file in root_directory
     """
-    if directory == None:
-        directory = os.getcwd() # Use working directory if unspecified
-        
-    image_list = [] # Initialize aggregaotrs
-    file_list = []
-    
-    directory_list = os.listdir(directory) # Get list of files
-    for entry in directory_list:
-        absolute_filename = os.path.join(directory, entry)
-        try:
-            image = PIL.Image.open(absolute_filename)
-            file_list += [entry]
-            image_list += [image]
-        except IOError:
-            pass # do nothing with errors tying to open non-images
-    return image_list, file_list
+    directory = os.getcwd() # Uses working directory for indexing     
+    image_list = [] # Initializes a new aggregatory list for holding the names of image files in the current directory
+    file_list = [] # Initializes a new aggregatory list for the names of the files in the current directory
+    directory_list = os.listdir(directory) # Gets a list of files in the current directory
+    for entry in directory_list: # Loops through all of the filenames in the directory
+        absolute_filename = os.path.join(directory, entry) # Sets the variable absolute_filename to the directory listing of the iterated filename
+        try: # Trys to:
+            image = PIL.Image.open(absolute_filename) # Test opening file specified by the filename in PIL
+            file_list += [entry] # Adds the filename to the file_list aggregator
+            image_list += [image] # Adds the filename to the image_list aggregator
+        except IOError: # Unless the operations throw an IOError
+            pass # Then do nothing with errors tying to open non-images
+    return image_list, file_list # Returns the aggregators
 
 def make_support(picture, wide, rgb):
     '''Imposes the support image on the input picture in the current directory, 
