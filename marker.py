@@ -43,7 +43,7 @@ def make_support(picture, wide, rgb):
     mersk = PIL.ImageDraw.Draw(mask,mode='RGBA') # Sets mersk to an instance
     # Building a square frame (out of 4 polygons) on the frame1 and by extension the frame0 canvises 
     frame0 = PIL.Image.new('RGBA',(width,height),color=None)# Creates the frame0 canvis with the same dimensions as the input image
-    frame1 = PIL.ImageDraw.Draw(frame0) # 
+    frame1 = PIL.ImageDraw.Draw(frame0) # Sets frame1 to an instance of an ImageDraw instance of frame0
     frame1.rectangle([(0,0),(width,wide)],fill=rgb)# Draws top box
     frame1.rectangle([(0,0),(wide,height)],fill=rgb)# Draws left box
     frame1.rectangle([(width,height),(0,height-wide)],fill=rgb)# Draws bottom box
