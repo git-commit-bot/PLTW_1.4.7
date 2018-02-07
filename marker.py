@@ -81,11 +81,11 @@ def make_images_support(wide, rgb):
         filename, filetype = os.path.splitext(file_list[n])
         # Frames the image with the requested frame size
         curr_image = file_list[n]
-        new_image = make_support(curr_image, wide, rgb)
-        # Saves the altered image as PNG
-        new_image_filename = os.path.join(new_directory, filename + '.png')
-        try:
-            new_image.save(new_image_filename)
-        except AttributeError:
-            pass
+        new_image = make_support(curr_image, wide, rgb) # Identies the newly created image as new_image
+        # Saves the altered image as PNG in directory 'support_images'
+        new_image_filename = os.path.join(new_directory, filename + '.png') 
+        try: # Attempts
+            new_image.save(new_image_filename) # Saves
+        except AttributeError: # If specified attribute(s) is missing 
+            pass # Does nothing
 
