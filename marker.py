@@ -85,7 +85,7 @@ def make_images_support(wide, rgb):
         # Saves the altered image as PNG in directory 'support_images'
         new_image_filename = os.path.join(new_directory, filename + '.png') 
         try: # Attempts
-            new_image.save(new_image_filename) # Saves
-        except AttributeError: # If specified attribute(s) is missing 
+            new_image.save(new_image_filename) # To save new image under the new image filename
+        except AttributeError: # If specified attribute(s) can't be used
             pass # Does nothing
 
