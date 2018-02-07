@@ -1,5 +1,5 @@
 This text file is merely an indecator of the code version.
 The current branch is:
-Master
+version_2
 This program currently:
-Works, but not fully how it's supposed to.
+Works how it's supposed to.
