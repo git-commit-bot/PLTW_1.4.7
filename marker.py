@@ -32,30 +32,30 @@ def make_support(picture, wide, rgb):
     'wide' (an unsigned integer which is used to determine frame thiccness)
     and 'rgb' (a 4 element tuple which determines the rgb color value of the frame)
     '''
-    if 'support' in picture:
-        return None
-    else:
-        pass
-    background = PIL.Image.open(picture)# Opens image and assigns it as the background.
-    width, height = background.size
-    mask = PIL.Image.open('support.png')
-    width0, height0 = mask.size
-    mersk = PIL.ImageDraw.Draw(mask,mode='RGBA')
+    if 'support' in picture: # Checks whether the input image is the support picture
+        return None # Ends execution if it is
+    else: # Else if it isn't
+        pass # Continue execution
+    background = PIL.Image.open(picture) # Opens the image specified by 'picture' and sets background to an instance of it
+    width, height = background.size # Sets the variables width and height to the values of the 2-tuple size attribue of background
+    mask = PIL.Image.open('support.png') # Opens the image 'support.png' and sets mask to an instance of it
+    width0, height0 = mask.size # Sets the variables width and height to the values of the 2-tuple size attribute of mask
+    mersk = PIL.ImageDraw.Draw(mask,mode='RGBA') # Sets mersk to an instance
     # Building a square frame (out of 4 polygons) on the frame1 and by extension the frame0 canvises 
-    frame0 = PIL.Image.new('RGBA',(width,height),color=None)# Creates the frame0 canvis with the same dimensions as the original picture
-    frame1 = PIL.ImageDraw.Draw(frame0)# 
+    frame0 = PIL.Image.new('RGBA',(width,height),color=None)# Creates the frame0 canvis with the same dimensions as the input image
+    frame1 = PIL.ImageDraw.Draw(frame0) # 
     frame1.rectangle([(0,0),(width,wide)],fill=rgb)# Draws top box
     frame1.rectangle([(0,0),(wide,height)],fill=rgb)# Draws left box
     frame1.rectangle([(width,height),(0,height-wide)],fill=rgb)# Draws bottom box
     frame1.rectangle([(width,height),(width-wide,0)],fill=rgb)# Draws right box
     frame1.rectangle([(wide,wide),(width-wide,height-wide)],fill=rgb)# Draws clear area
     dwide = 2*wide # Creates the dwide variable set to 2* the width of the frame
-    qwid, hhght = (width/4,height/2)
-    ewid0, hhght0 = (width0/8,height0/2)
+    qwid, hhght = (width/4,height/2) # 
+    ewid0, hhght0 = (width0/8,height0/2) # 
     newground = background.resize((width-dwide,height-dwide)) # Resizes the picture to fit within the frame
-    frame0.paste(newground,box=(wide,wide))
-    frame0.paste(mask,box=(qwid+ewid0,hhght))
-    frame0.show()
+    frame0.paste(newground,box=(wide,wide)) # 
+    frame0.paste(mask,box=(qwid+ewid0,hhght)) # 
+    frame0.show() # Displays frame0
     return frame0 # Returns the frame0 object
 
 def make_images_support(wide, rgb):
