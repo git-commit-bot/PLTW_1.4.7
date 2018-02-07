@@ -36,8 +36,10 @@ def make_support(picture, wide, rgb):
     else:
         pass
     background = PIL.Image.open(picture)# Opens image and assigns it as the background.
-    mask = PIL.Image.open('support.png')
     width, height = background.size
+    mask = PIL.Image.open('support.png')
+    width0, height0 = mask.size
+    mersk = PIL.ImageDraw.Draw(mask,mode='RGBA')
     # Building a square frame (out of 4 polygons) on the frame1 and by extension the frame0 canvises 
     frame0 = PIL.Image.new('RGBA',(width,height),color=None)# Creates the frame0 canvis with the same dimensions as the original picture
     frame1 = PIL.ImageDraw.Draw(frame0)# 
@@ -47,8 +49,12 @@ def make_support(picture, wide, rgb):
     frame1.rectangle([(width,height),(width-wide,0)],fill=rgb)# Draws right box
     frame1.rectangle([(wide,wide),(width-wide,height-wide)],fill=rgb)# Draws clear area
     dwide = 2*wide # Creates the dwide variable set to 2* the width of the frame
+    qwid, hhght = (width/4,height/2)
+    ewid0, hhght0 = (width0/8,height0/2)
     newground = background.resize((width-dwide,height-dwide)) # Resizes the picture to fit within the frame
     frame0.paste(newground,box=(wide,wide))
+    frame0.paste(mask,box=(qwid+ewid0,hhght))
+    frame0.show()
     return frame0 # Returns the frame0 object
 
 def make_images_support(wide, rgb):
@@ -76,3 +82,4 @@ def make_images_support(wide, rgb):
             new_image.save(new_image_filename)
         except AttributeError:
             pass
+
