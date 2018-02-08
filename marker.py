@@ -1,6 +1,6 @@
-import PIL
-import PIL.ImageDraw
-import os.path
+import PIL # Imports the Python Imaging Library 
+import PIL.ImageDraw # Imports the ImageDraw Class from the Python Imaging Library
+import os.path # Imports os paths
 
 def get_images():
     """ Returns PIL.Image objects for all the images in directory.
