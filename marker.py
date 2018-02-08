@@ -50,11 +50,11 @@ def make_support(picture, wide, rgb):
     frame1.rectangle([(width,height),(width-wide,0)],fill=rgb)# Draws right box
     frame1.rectangle([(wide,wide),(width-wide,height-wide)],fill=rgb)# Draws clear area
     dwide = 2*wide # Creates the dwide variable set to 2* the width of the frame
-    qwid, hhght = (width/4,height/2) # 
-    ewid0, hhght0 = (width0/8,height0/2) # 
-    newground = background.resize((width-dwide,height-dwide)) # Resizes the picture to fit within the frame
-    frame0.paste(newground,box=(wide,wide)) # 
-    frame0.paste(mask,box=(qwid+ewid0,hhght)) # 
+    qwid, hhght = (width/4,height/2) # Sets the values qwid and hhght to 1/4th the width and uses 
+    ewid0, hhght0 = (width0/8,height0/2) # Sets the values ewid0 and hhght0 to 1/8th width0 and 1/2 height0 respectively
+    newground = background.resize((width-dwide,height-dwide)) # Resizes background instance to fit within the frame and sets newground = to it
+    frame0.paste(newground,box=(wide,wide)) # Pastes the newground image on frame0
+    frame0.paste(mask,box=(qwid+ewid0,hhght)) # Pastes the mask image on frame0
     frame0.show() # Displays frame0
     return frame0 # Returns the frame0 object
 
